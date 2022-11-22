@@ -31,42 +31,63 @@ class ListenerNode(Node):
     def callback(self, joy_msg):
         axes_0 = float(joy_msg.axes[0])
         axes_1 = float(joy_msg.axes[1])
+        axes_3 = float(joy_msg.axes[3])
+        axes_4 = float(joy_msg.axes[4])
 
-        if axes_0 == 0 and axes_1 == 1:
-            print('front')
+        if axes_1 > 0:
             self.motor_back.value = 1.0
-            self.motor_front.value = 0.0
-        elif axes_0 < 0 and axes_1 > 0:
-            print('front right')
-            self.motor_back.value = 1.0
-            self.motor_front.value = -1.0
-        elif axes_0 > 0 and axes_1 > 0:
-            print('front left')
-            self.motor_back.value = 1.0
-            self.motor_front.value = 1.0
-        elif axes_0 == -1 and axes_1 == 0:
-            print('right')
-            self.motor_back.value = 1.0
-            self.motor_front.value = -1.0
-        elif axes_0 == 1 and axes_1 == 0:
-            print('left')
-            self.motor_back.value = 1.0
-            self.motor_front.value = 1.0
-        elif axes_0 < 0 and axes_1 < 0:
-            print('back right')
+            if axes_3 > 0:
+                self.motor_front.value = -1.0
+            elif axes_3 < 0:
+                self.motor_front.value = 1.0
+            else:
+                self.motor_front.value = 0.0
+        elif axes_1 < 0:
             self.motor_back.value = -1.0
-            self.motor_front.value = -1.0
-        elif axes_0 > 0 and axes_1 < 0:
-            print('back left')
-            self.motor_back.value = -1.0
-            self.motor_front.value = 1.0
-        elif axes_0 == 0 and axes_1 == -1:
-            print('back')
-            self.motor_back.value = -1.0
-            self.motor_front.value = 0.0
+            if axes_3 > 0:
+                self.motor_front.value = -1.0
+            elif axes_3 < 0:
+                self.motor_front.value = 1.0
+            else:
+                self.motor_front.value = 0.0
         else:
-            self.motor_back.value = 0
-            self.motor_front.value = 0
+            self.motor_back.value = 0.0
+
+        # if axes_0 == 0 and axes_1 == 1:
+        #     print('front')
+        #     self.motor_back.value = 1.0
+        #     self.motor_front.value = 0.0
+        # elif axes_0 < 0 and axes_1 > 0:
+        #     print('front right')
+        #     self.motor_back.value = 1.0
+        #     self.motor_front.value = 1.0
+        # elif axes_0 > 0 and axes_1 > 0:
+        #     print('front left')
+        #     self.motor_back.value = 1.0
+        #     self.motor_front.value = -1.0
+        # elif axes_0 == -1 and axes_1 == 0:
+        #     print('right')
+        #     self.motor_back.value = 1.0
+        #     self.motor_front.value = 1.0
+        # elif axes_0 == 1 and axes_1 == 0:
+        #     print('left')
+        #     self.motor_back.value = 1.0
+        #     self.motor_front.value = -1.0
+        # elif axes_0 < 0 and axes_1 < 0:
+        #     print('back right')
+        #     self.motor_back.value = -1.0
+        #     self.motor_front.value = 1.0
+        # elif axes_0 > 0 and axes_1 < 0:
+        #     print('back left')
+        #     self.motor_back.value = -1.0
+        #     self.motor_front.value = -1.0
+        # elif axes_0 == 0 and axes_1 == -1:
+        #     print('back')
+        #     self.motor_back.value = -1.0
+        #     self.motor_front.value = 0.0
+        # else:
+        #     self.motor_back.value = 0
+        #     self.motor_front.value = 0
 
 
 def main():
